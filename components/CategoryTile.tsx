@@ -1,19 +1,31 @@
-import { Image, StyleSheet, Text, View, ImageSourcePropType } from "react-native";
+import { useState } from "react";
+import { Image, StyleSheet, Text, View, ImageSourcePropType, Pressable } from "react-native";
 import { RFValue } from "./responsive/responsiveFont";
 
 interface Props {
   name: string;
-  image: ImageSourcePropType
+  image: ImageSourcePropType;
+  focused: boolean;
+  onPress:(newCategory:number)=>void;
+  index:number
 }
 
 function CategoryTile(props: Props): JSX.Element {
+  const [pressed, setPressed] = useState<boolean>(false)
+  const onPressIn = () => {
+    setPressed(true);
+  };
+
+  const onPressOut = () => {
+    setPressed(false);
+  };
   return (
-    <View style={styles.container}>
-      <View style={styles.imageContainer} >
+    <Pressable style={styles.container} onPress={()=>props.onPress(props.index)} onPressIn={onPressIn} onPressOut={onPressOut}>
+      <View style={[styles.imageContainer,props.focused?{backgroundColor:"#784dfa"}:pressed?{backgroundColor:"#ababab"}:null]} >
         <Image source={props.image} resizeMode="cover" style={styles.image}/>
       </View>
       <Text style={styles.text}>{props.name}</Text>
-    </View>
+    </Pressable>
   );
 }
 
@@ -23,8 +35,6 @@ const styles = StyleSheet.create({
   container: {
     margin: 10,
     alignItems: "center",
-    
-
   },
   imageContainer: {
     height: RFValue(100),

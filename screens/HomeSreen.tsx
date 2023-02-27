@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { CommonActions } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { type BottomTabNavigation } from "../App";
+import ListOfProducts from "../components/ListOfProducts";
 const styles = StyleSheet.create({
     container:{
         flex:1,
@@ -80,6 +81,10 @@ const categories = [{name:"All", image:require("../images/friesbox.png")},{name:
 const popularItems = [{name: "Beef Burger",price:20, image:require("../images/beefBurger.png")},{name:"Pizza margarita",price:34, image:require("../images/margherita.png")},{name:"Spaghetti",price:34, image:require("../images/spaghetti.png")}]
 function HomeScreen():JSX.Element{
     const navigation = useNavigation<BottomTabNavigation>()
+    const [selectedCategory, setSelectedCategory] = useState<number>(0)
+    function changeCategory(newCategory:number):void{
+        setSelectedCategory(newCategory)
+    }
     return <>
 <ScrollView style={styles.container}>
         <View style={styles.titleContainer}>
@@ -93,10 +98,11 @@ function HomeScreen():JSX.Element{
         <View>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                 {categories.map((item,index)=>{
-                    return <CategoryTile name={item.name} key={`${index}`} image={item.image}/>
+                    return <CategoryTile onPress={changeCategory} name={item.name} key={`${index}`} image={item.image} focused={index===selectedCategory?true:false} index={index}/>
                 })}
             </ScrollView>
         </View>
+        {selectedCategory>0?<ListOfProducts index={selectedCategory}/>:<>
         <View style={styles.promotionContainer}>
             <Text style={styles.subtitle}>Promotion</Text>
             <LinearGradient style={styles.promotionBox} colors={["#784dfa","#8e6ef5"]}>
@@ -113,7 +119,7 @@ function HomeScreen():JSX.Element{
                     return <PopularItem name={item.name} price={item.price} key={index} image={item.image}/>
                 })}
             </ScrollView>
-        </View>
+        </View></>}
     </ScrollView>
     </>
 }
