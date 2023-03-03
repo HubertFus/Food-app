@@ -6,6 +6,9 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import HomeScreen from './screens/HomeSreen';
 import StartScreen from './screens/StartScreen';
+import CartContextProvider, { CartContext } from './store/cart-context';
+import CartScreen from './screens/CartScreen';
+import { useState } from 'react';
 
 export type BottomTabParamList = {
   Start: undefined;
@@ -18,7 +21,9 @@ export type BottomTabNavigation = BottomTabNavigationProp<BottomTabParamList>;
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 function Home() {
+  
   return (
+      <CartContextProvider>
     <Tab.Navigator>
       <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false, tabBarIcon:({size,focused,color})=>{return <Ionicons size={size} color={"#784dfa"} name={focused?"home-sharp":"home-outline"}/>},tabBarStyle:{borderTopWidth: 0,
             backgroundColor: '#FFFFFF',
@@ -32,13 +37,14 @@ function Home() {
             borderTopLeftRadius: 20,
             height: 55,
             paddingBottom: 5,} }} />
-      <Tab.Screen name="Cart" component={HomeScreen} options={{ headerShown: false, tabBarIcon:({size,focused,color})=>{return <Ionicons size={size} color={"#784dfa"} name={focused?"cart-sharp":'cart-outline'}/>},tabBarStyle:{borderTopWidth: 0,
+      <Tab.Screen name="Cart" component={CartScreen} options={{ headerShown: false, tabBarIcon:({size,focused,color})=>{return <Ionicons size={size} color={"#784dfa"} name={focused?"cart-sharp":'cart-outline'}/>},tabBarStyle:{borderTopWidth: 0,
             backgroundColor: '#FFFFFF',
             borderTopRightRadius: 20,
             borderTopLeftRadius: 20,
             height: 55,
             paddingBottom: 5,}}} />
     </Tab.Navigator>
+      </CartContextProvider>
   );
 }
 export type ScreenNames = ["Start", "Home"] 

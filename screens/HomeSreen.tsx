@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { CommonActions } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { type BottomTabNavigation } from "../App";
-import ListOfProducts from "../components/ListOfProducts";
+import ListOfProducts, { products } from "../components/ListOfProducts";
 const styles = StyleSheet.create({
     container:{
         flex:1,
@@ -77,8 +77,18 @@ const styles = StyleSheet.create({
         width:RFValue(70)
     }
 })
-const categories = [{name:"All", image:require("../images/friesbox.png")},{name:"Burger",image:require("../images/beefBurger.png")},{name:"Pizza",image:require("../images/margherita.png")},{name:"Pasta",image:require("../images/spaghetti.png")},{name:"Dessert",image:require("../images/dessert.png")},{name:"Wings",image:require("../images/wings.png")},{name:"Drink",image:require("../images/soda.png")},{name:"Alcohol",image:require("../images/alcohol.png")},{name:"Sauce",image:require("../images/sauce.png")},{name:"Other",image:require("../images/soup.png")}]
-const popularItems = [{name: "Beef Burger",price:20, image:require("../images/beefBurger.png")},{name:"Pizza margarita",price:34, image:require("../images/margherita.png")},{name:"Spaghetti",price:34, image:require("../images/spaghetti.png")}]
+const categories = [
+    {name:"All", image:require("../images/friesbox.png")},
+    {name:"Burger",image:require("../images/beefBurger.png")},
+    {name:"Pizza",image:require("../images/margherita.png")},
+    {name:"Pasta",image:require("../images/spaghetti.png")},
+    {name:"Dessert",image:require("../images/dessert.png")},
+    {name:"Wings",image:require("../images/wings.png")},
+    {name:"Drink",image:require("../images/soda.png")},
+    {name:"Alcohol",image:require("../images/alcohol.png")},
+    {name:"Sauce",image:require("../images/sauce.png")},
+    {name:"Other",image:require("../images/soup.png")}]
+const popularItems = [{category:0,id:0},{category:1,id:0},{category:2,id:0}]
 function HomeScreen():JSX.Element{
     const navigation = useNavigation<BottomTabNavigation>()
     const [selectedCategory, setSelectedCategory] = useState<number>(0)
@@ -116,7 +126,7 @@ function HomeScreen():JSX.Element{
             <Text style={styles.subtitle}>Popular</Text>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                 {popularItems.map((item,index)=>{
-                    return <PopularItem name={item.name} price={item.price} key={index} image={item.image}/>
+                    return <PopularItem product={products[item.category].items[item.id]}/>
                 })}
             </ScrollView>
         </View></>}

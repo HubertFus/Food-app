@@ -10,9 +10,11 @@ import {
 import { RFValue } from "./responsive/responsiveFont";
 
 interface Props {
-  name: string;
-  price: number;
-  image: ImageSourcePropType;
+  product: {
+    name: string,
+    image: ImageSourcePropType,
+    price: number
+  }
 }
 
 function PopularItem(props: Props): JSX.Element {
@@ -29,11 +31,11 @@ function PopularItem(props: Props): JSX.Element {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={props.image} style={styles.image} resizeMode="cover" />
+        <Image source={props.product.image} style={styles.image} resizeMode="cover" />
       </View>
       <View style={styles.detailsContainer}>
-        <Text style={styles.name}>{props.name}</Text>
-        <Text style={styles.price}>${props.price.toFixed(2)}</Text>
+        <Text style={styles.name}>{props.product.name}</Text>
+        <Text style={styles.price}>${props.product.price.toFixed(2)}</Text>
       </View>
       <Pressable
         style={[
