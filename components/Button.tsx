@@ -38,8 +38,10 @@ const styles = StyleSheet.create({
         backgroundColor:"#ab200c"
     },
     buttonText:{
+        width:"100%",
         color:"white",
         fontSize:RFValue(40),
-        fontWeight:"bold"
+        fontWeight:"bold",
+        textAlign:"center"
     }
 })

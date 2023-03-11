@@ -8,7 +8,8 @@ import { useState, useEffect } from "react";
 import { CommonActions } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { type BottomTabNavigation } from "../App";
-import ListOfProducts, { products } from "../components/ListOfProducts";
+import ListOfProducts from "../components/ListOfProducts";
+import { products } from "../store/Data";
 const styles = StyleSheet.create({
     container:{
         flex:1,
