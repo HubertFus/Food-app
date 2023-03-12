@@ -9,6 +9,7 @@ import StartScreen from './screens/StartScreen';
 import CartContextProvider, { CartContext } from './store/cart-context';
 import CartScreen from './screens/CartScreen';
 import { useState } from 'react';
+import SearchSreen from './screens/SearchSreen';
 
 export type BottomTabParamList = {
   Start: undefined;
@@ -31,7 +32,7 @@ function Home() {
             borderTopLeftRadius: 20,
             height: 55,
             paddingBottom: 5,} }} />
-      <Tab.Screen name="Search" component={HomeScreen} options={{ headerShown: false, tabBarIcon:({size,focused,color})=>{return <Ionicons size={size} color={"#784dfa"} name={focused?"search-sharp":"search-outline"}/>},tabBarShowLabel:false,tabBarStyle:{borderTopWidth: 0,
+      <Tab.Screen name="Search" component={SearchSreen} options={{ headerShown: false, tabBarIcon:({size,focused,color})=>{return <Ionicons size={size} color={"#784dfa"} name={focused?"search-sharp":"search-outline"}/>},tabBarShowLabel:false,tabBarStyle:{borderTopWidth: 0,
             backgroundColor: '#FFFFFF',
             borderTopRightRadius: 20,
             borderTopLeftRadius: 20,

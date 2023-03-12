@@ -18,7 +18,7 @@ function CartScreen():JSX.Element{
         {cartProductsCtx.ids.length>0?<View style={{flex:1}}>
             <ScrollView>
                 {cartProductsCtx.ids.map((item:state)=>{
-                return <Product id={item} product={products[item.category].items[item.id]} quantity={item.quantity}/>
+                return <Product key={`${item.category}${item.id}`} id={item} product={products[item.category].items[item.id]} quantity={item.quantity}/>
             })}
             </ScrollView>
             <View style={styles.footer}>

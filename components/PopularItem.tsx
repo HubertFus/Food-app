@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Pressable,
   StyleSheet,
@@ -7,27 +7,26 @@ import {
   Image,
   ImageSourcePropType,
 } from "react-native";
+import IconButton from "./IconButton";
 import { RFValue } from "./responsive/responsiveFont";
+import { CartContext } from "../store/cart-context";
 
 interface Props {
   product: {
     name: string,
     image: ImageSourcePropType,
-    price: number
+    price: number,
   }
+  category: number,
+  id: number
 }
 
 function PopularItem(props: Props): JSX.Element {
   const [buttonPressed, setButtonPressed] = useState<boolean>(false);
-
-  const onPressIn = () => {
-    setButtonPressed(true);
-  };
-
-  const onPressOut = () => {
-    setButtonPressed(false);
-  };
-
+  const cartProductsCtx = useContext(CartContext)
+  const onPress = () =>{
+    cartProductsCtx.addToCart(props.category, props.id)
+  }
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -37,16 +36,7 @@ function PopularItem(props: Props): JSX.Element {
         <Text style={styles.name}>{props.product.name}</Text>
         <Text style={styles.price}>${props.product.price.toFixed(2)}</Text>
       </View>
-      <Pressable
-        style={[
-          styles.addButtonContainer,
-          buttonPressed && styles.addButtonContainerPressed,
-        ]}
-        onPressIn={onPressIn}
-        onPressOut={onPressOut}
-      >
-        <Text style={styles.addButtonText}>+</Text>
-      </Pressable>
+      <IconButton name="add-circle" style={styles.addButtonContainer} size={RFValue(40)} onPress={onPress}/>
     </View>
   );
 }
@@ -84,28 +74,15 @@ const styles = StyleSheet.create({
     color: "#333",
     marginBottom: RFValue(4),
   },
-  price: {
+  price:{
     fontSize: RFValue(20),
     fontWeight: "bold",
-    color: "#E91E63",
+    color: "#ffae00",
   },
   addButtonContainer: {
     position: "absolute",
     bottom: RFValue(10),
     right: RFValue(10),
-    width: RFValue(45),
-    height: RFValue(45),
-    borderRadius: RFValue(45) / 2,
-    backgroundColor: "#E91E63",
-    justifyContent: "center",
-    alignItems: "center",
     elevation: 5,
-  },
-  addButtonContainerPressed: {
-    backgroundColor: "#C2185B",
-  },
-  addButtonText: {
-    fontSize: RFValue(24),
-    color: "#fff",
   },
 });

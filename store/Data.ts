@@ -6,4 +6,4 @@ export const products = [{name:"Burgers",items:[{name:"Beef Burger",image:requir
 {name:"Drinks",items:[{name:"Drink",image:require("../images/soda.png"),price:30}]},
 {name:"Alcohols",items:[{name:"Alcohol",image:require("../images/alcohol.png"),price:30}]},
 {name:"Sauces",items:[{name:"Sauce",image:require("../images/sauce.png"),price:30}]},
-{name:"Others",items:[{name:"Other",image:require("../images/soup.png"),price:30}]}]
+{name:"Others",items:[{name:"Soup",image:require("../images/soup.png"),price:30}]}]

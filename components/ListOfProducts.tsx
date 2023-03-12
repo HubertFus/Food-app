@@ -2,6 +2,7 @@ import { useState, useLayoutEffect, useContext } from "react";
 import { FlatList, StyleSheet, Text, View, Image, Pressable} from "react-native";
 import { CartContext } from "../store/cart-context";
 import { products } from "../store/Data";
+import IconButton from "./IconButton";
 import { RFValue } from "./responsive/responsiveFont";
 interface Props {
     index:number
@@ -31,13 +32,7 @@ function ListOfProducts(props:Props):JSX.Element{
             <View style={styles.textContainer}>
                 <Text style={styles.itemName}>{item.name}</Text>
                 <Text style={styles.price}>{item.price}$</Text>
-                <Pressable
-                    style={styles.addButtonContainer}
-                    onPressIn={onPressIn}
-                    onPressOut={onPressOut}
-                    onPress={()=>{onPress(index)}}>
-                    <Text style={styles.addButtonText}>+</Text>
-                </Pressable>
+                <IconButton name="add-circle" style={styles.addButtonContainer} onPress={()=>{onPress(index)}} size={RFValue(50)}/>
             </View>
         </View>
       );
@@ -81,21 +76,15 @@ const styles = StyleSheet.create({
       fontSize: RFValue(20),
       fontWeight:"700"
     },
-    price: {
-        fontSize: RFValue(20),
-        fontWeight: "bold",
-        color: "#E91E63",
+    price:{
+      fontSize: RFValue(20),
+      fontWeight: "bold",
+      color: "#ffae00",
     },
     addButtonContainer: {
         position: "absolute",
         bottom: 0,
         right: RFValue(10),
-        width: RFValue(40),
-        height: RFValue(40),
-        borderRadius: RFValue(45) / 2,
-        backgroundColor: "#E91E63",
-        justifyContent: "center",
-        alignItems: "center",
         elevation: 5,
     },
     addButtonContainerPressed: {

@@ -33,22 +33,6 @@ const styles = StyleSheet.create({
         backgroundColor:"gray",
         borderRadius:100
     },
-    searchBar:{
-        alignItems:"center",
-        display:"flex",
-        flexDirection:"row",
-        marginVertical:RFValue(20),
-        paddingHorizontal:RFValue(10),
-        paddingVertical:RFValue(6),
-        backgroundColor:"#adadad",
-        borderRadius:20
-    },
-    searchBarText:{
-        width:"100%",
-        paddingHorizontal:5,
-        fontSize:RFValue(20),
-        color:"#454545"
-    },
     subtitle:{
         fontSize:RFValue(35)
     },
@@ -102,10 +86,6 @@ function HomeScreen():JSX.Element{
             <Text style={styles.title}>Menu</Text>
             <View style={styles.userAvatar}></View>
         </View>
-        <View style={styles.searchBar}>
-            <Ionicons name="search" size={24} color="#454545" />
-            <TextInput placeholder="Search" style={styles.searchBarText}/>
-        </View>
         <View>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                 {categories.map((item,index)=>{
@@ -127,7 +107,7 @@ function HomeScreen():JSX.Element{
             <Text style={styles.subtitle}>Popular</Text>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                 {popularItems.map((item,index)=>{
-                    return <PopularItem product={products[item.category].items[item.id]}/>
+                    return <PopularItem category={item.category} id={item.id} product={products[item.category].items[item.id]}/>
                 })}
             </ScrollView>
         </View></>}
